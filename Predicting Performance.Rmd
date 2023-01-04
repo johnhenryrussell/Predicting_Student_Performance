@@ -1,0 +1,18 @@
+---
+title: "Predicting Student Performance"
+author: "John Russell"
+date: "2023-01-04"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## The goal of this project is to gain insights on classroom performance. We will begin with a series of visualizations and conclude with a predictive model. 
+
+```{r}
+score_data <- read.csv('StudentsPerformance.csv', header = TRUE)
+head(score_data)
+```
+
