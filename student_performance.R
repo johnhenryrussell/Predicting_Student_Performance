@@ -2,6 +2,8 @@
 library(ggplot2)
 library(dplyr)
 library(patchwork)
+library(plotly)
+library(tidyverse)
 
 # LOAD THE DATA
 score_data <- read.csv('StudentsPerformance.csv', header = TRUE)
@@ -122,4 +124,32 @@ plots_arranged <-
                  female_writing) + plot_annotation(theme = theme_gray(base_family = 'mono'),
                                                    title = "Distribution of Scores across Gender")
 
+
 plots_arranged
+
+# TABLE OF AVERAGES
+
+male_means <-
+        c(
+                "Male",
+                round(mean(male_score_data$math.score), 2),
+                round(mean(male_score_data$reading.score), 2),
+                round(mean(male_score_data$writing.score),2)
+        )
+
+female_means <-
+        c(
+                "Female",
+                round(mean(female_score_data$math.score),2),
+                round(mean(female_score_data$reading.score),2),
+                round(mean(female_score_data$writing.score),2)
+        )
+
+
+mean_matrix <- as.data.frame(rbind(male_means, female_means))
+colnames(mean_matrix) <- c('Gender', 'Math', 'Reading', "Writing")
+mean_df <- as.data.frame(mean_matrix)
+
+
+
+mean_df %>% gt() %>% gt_theme_nytimes()
