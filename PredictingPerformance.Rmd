@@ -170,7 +170,14 @@ mean_df <- as.data.frame(mean_matrix)
 mean_df %>% gt() %>% gt_theme_538() %>% tab_header(title = 'Mean Scores')
 ```
 
-### We can see that male's tend to score higher in Math while female's tend to score higher in Reading and Writing. We see that the Reading and Writing histograms for the female group are skewed to the right. The 'why' is an interesting question in and of itself.
+\textbf{There are some interesting conclusion we can make:}
+
+\begin{itemize}
+\item \textbf{Male's tend to score higher in Math.}
+\item \textbf{Female's tend to score higher in Reading and Writing.}
+\item \textbf{The distribution for the male group is relatively normal while the distribution for the female group is skewed to the right.}
+\end{itemize}
+
 
 ### Next, we want to look at the effect of parental level of education on subject scores.
 
@@ -294,21 +301,24 @@ ed_arranged
 
 ```
 
-```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE, fig.height=4, fig.width=8}
 histo_df <- data.frame(values <- c(parents1$mean.score, parents2$mean.score, parents3$mean.score,
                                    parents4$mean.score, parents5$mean.score, parents6$mean.score),
-                       group = c(rep("some high school", length(parents1$mean.score)),
-                                 rep("high school", length(parents2$mean.score)),
-                                 rep("some college", length(parents3$mean.score)),
-                                 rep("associate's degree", length(parents4$mean.score)),
-                                 rep("bachelor's degree", length(parents5$mean.score)),
-                                 rep("master's degree", length(parents6$mean.score))))
+                       group = c(rep("some hig.", length(parents1$mean.score)),
+                                 rep("high s", length(parents2$mean.score)),
+                                 rep("some col.", length(parents3$mean.score)),
+                                 rep("associate's", length(parents4$mean.score)),
+                                 rep("bachelor's", length(parents5$mean.score)),
+                                 rep("master's", length(parents6$mean.score))))
 
 overlay_histo <- ggplot(histo_df, aes(x=values, fill=group)) + geom_density(position="identity", alpha=0.3) + 
-        theme(legend.position = "bottom") + labs(x="Mean Score")
+        theme(legend.position = "none") + labs(x="Mean Score", y="") + 
+        scale_fill_manual(values=c("#00bfc4", "#619cff", "#b79f00", "#f564e3", "#00ba38", "#f8766d"))
 
-overlay_histo + plot_annotation(theme = theme_gray(base_family = 'mono'),
-                    title = "Overlay Mean Scores across Parental Education Level")
+overlay_histo
+
 ```
 
+\textbf{We see that student's whose parents achieved beyond a bachelor's degree are more likely to score beyond $80\%$. Furthermore, student's whose parents did not attend college are more likely to score below $60\%$. Otherwise, it appears to be difficult to differentiate between different levels of parental education.}
 
+### Next, we will look at how race affects subject specific exam scores. 
