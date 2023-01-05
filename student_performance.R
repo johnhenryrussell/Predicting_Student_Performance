@@ -130,20 +130,16 @@ plots_arranged
 # TABLE OF AVERAGES
 
 male_means <-
-        c(
-                "Male",
-                round(mean(male_score_data$math.score), 2),
-                round(mean(male_score_data$reading.score), 2),
-                round(mean(male_score_data$writing.score),2)
-        )
+        c("Male",
+          round(mean(male_score_data$math.score), 2),
+          round(mean(male_score_data$reading.score), 2),
+          round(mean(male_score_data$writing.score), 2))
 
 female_means <-
-        c(
-                "Female",
-                round(mean(female_score_data$math.score),2),
-                round(mean(female_score_data$reading.score),2),
-                round(mean(female_score_data$writing.score),2)
-        )
+        c("Female",
+          round(mean(female_score_data$math.score), 2),
+          round(mean(female_score_data$reading.score), 2),
+          round(mean(female_score_data$writing.score), 2))
 
 
 mean_matrix <- as.data.frame(rbind(male_means, female_means))
@@ -174,81 +170,126 @@ for (i in 1:6) {
 }
 
 
-
+### HISTOGRAM PLOT FOR ALL
 parents <- parents %>% mutate(percent = (n / sum(n)) * 100)
 parents %>% gt() %>% gt_theme_nytimes()
 
 colnames(parents) <- c('ParentalEducation', "n", "percent")
 
-hi<-ggplot(parents, aes(x=ParentalEducation, y=n, fill=ParentalEducation)) + 
-        geom_col() + 
-        theme(legend.position = "none")+
-        labs(x="", y = "Count", title = 'Parental Level of Education')
+hi <-
+        ggplot(parents,
+               aes(x = ParentalEducation, y = n, fill = ParentalEducation)) +
+        geom_col() +
+        theme(legend.position = "none") +
+        labs(x = "", y = "Count", title = 'Parental Level of Education')
 
-parents1 <- filter(score_data, parental.level.of.education == "some high school")
-parents2 <- filter(score_data, parental.level.of.education == "high school")
-parents3 <- filter(score_data, parental.level.of.education == "some college")
-parents4 <- filter(score_data, parental.level.of.education == "associate's degree")
-parents5 <- filter(score_data, parental.level.of.education == "bachelor's degree")
-parents6 <- filter(score_data, parental.level.of.education == "master's degree")
+parents1 <-
+        filter(score_data, parental.level.of.education == "some high school")
+parents2 <-
+        filter(score_data, parental.level.of.education == "high school")
+parents3 <-
+        filter(score_data, parental.level.of.education == "some college")
+parents4 <-
+        filter(score_data,
+               parental.level.of.education == "associate's degree")
+parents5 <-
+        filter(score_data, parental.level.of.education == "bachelor's degree")
+parents6 <-
+        filter(score_data, parental.level.of.education == "master's degree")
 
 
-
-p1<-ggplot(parents1, aes(x=mean.score)) + geom_histogram(fill= '#f8766d',color='black', binwidth = 2.5) + 
-        labs(title="Some High School", x="Mean Score") +
+### INDIVIDUAL HISTOGRAM PLOTS
+p1 <-
+        ggplot(parents1, aes(x = mean.score)) + geom_histogram(fill = '#f8766d',
+                                                               color = 'black',
+                                                               binwidth = 2.5) +
+        labs(title = "Some High School", x = "Mean Score") +
         scale_x_continuous(breaks = seq(0, 100, 10)) +
         scale_y_continuous(NULL, breaks = NULL) +
         geom_density(alpha = .2, fill = 'pink')
 
-p2<-ggplot(parents2, aes(x=mean.score)) + geom_histogram(fill='#b79f00',color='black', binwidth = 2) + 
-        labs(title = "High School", x="Mean Score") +
-        scale_x_continuous(breaks = seq(0, 100, 10))+
+p2 <-
+        ggplot(parents2, aes(x = mean.score)) + geom_histogram(fill = '#b79f00',
+                                                               color = 'black',
+                                                               binwidth = 2) +
+        labs(title = "High School", x = "Mean Score") +
+        scale_x_continuous(breaks = seq(0, 100, 10)) +
         scale_y_continuous(NULL, breaks = NULL)
 
-p3<-ggplot(parents3, aes(x=mean.score)) + geom_histogram(fill='#00ba38',color='black', binwidth = 2) + 
-        labs(title="Some College", x="Mean Score") +
-        scale_x_continuous(breaks = seq(0, 100, 10))+
+p3 <-
+        ggplot(parents3, aes(x = mean.score)) + geom_histogram(fill = '#00ba38',
+                                                               color = 'black',
+                                                               binwidth = 2) +
+        labs(title = "Some College", x = "Mean Score") +
+        scale_x_continuous(breaks = seq(0, 100, 10)) +
         scale_y_continuous(NULL, breaks = NULL)
 
-p4<-ggplot(parents4, aes(x=mean.score)) + geom_histogram(fill='#00bfc4',color='black', binwidth = 1.7) + 
-        labs(title = "Associate's Degree", x="Mean Score") +
-        scale_x_continuous(breaks = seq(0, 100, 10))+
+p4 <-
+        ggplot(parents4, aes(x = mean.score)) + geom_histogram(fill = '#00bfc4',
+                                                               color = 'black',
+                                                               binwidth = 1.7) +
+        labs(title = "Associate's Degree", x = "Mean Score") +
+        scale_x_continuous(breaks = seq(0, 100, 10)) +
         scale_y_continuous(NULL, breaks = NULL)
 
-p5<-ggplot(parents5, aes(x=mean.score)) + geom_histogram(fill='#619cff',color='black', binwidth = 2) + 
-        labs(title="Bachelor's Degree", x="Mean Score") +
-        scale_x_continuous(breaks = seq(0, 100, 10))+
+p5 <-
+        ggplot(parents5, aes(x = mean.score)) + geom_histogram(fill = '#619cff',
+                                                               color = 'black',
+                                                               binwidth = 2) +
+        labs(title = "Bachelor's Degree", x = "Mean Score") +
+        scale_x_continuous(breaks = seq(0, 100, 10)) +
         scale_y_continuous(NULL, breaks = NULL)
 
-p6<-ggplot(parents6, aes(x=mean.score)) + geom_histogram(fill='#f564e3',color='black', binwidth = 2) + 
-        labs(title = "Master's Degree", x="Mean Score") +
-        scale_x_continuous(breaks = seq(0, 100, 10))+
-        scale_y_continuous(NULL, breaks = NULL)+
+p6 <-
+        ggplot(parents6, aes(x = mean.score)) + geom_histogram(fill = '#f564e3',
+                                                               color = 'black',
+                                                               binwidth = 2) +
+        labs(title = "Master's Degree", x = "Mean Score") +
+        scale_x_continuous(breaks = seq(0, 100, 10)) +
+        scale_y_continuous(NULL, breaks = NULL) +
         geom_density(alpha = .2, fill = 'pink')
 
-ed_arranged <- (p1|p2) / (p3|p4) / (p5|p6) + plot_annotation(theme = theme_gray(base_family = 'mono'),
-                    title = "Distribution of Mean Scores across Parental Education Level")
+ed_arranged <-
+        (p1 |p2) / (p3 |p4) / (p5 |p6) + plot_annotation(theme = theme_gray(base_family = 'mono'),
+                                                         title = "Distribution of Mean Scores across Parental Education Level")
 
 ed_arranged
 
 
+### COMPARING COLLEGE VS. NO COLLEGE
+parents_college <-
+        filter(
+                score_data,
+                parental.level.of.education %in% c(
+                        "associate's degree",
+                        "bachelor's degree",
+                        "master's degree",
+                        "some college"
+                )
+        )
 
-parents_college <- filter(score_data, parental.level.of.education %in% c("associate's degree", "bachelor's degree", "master's degree", "some college"))
+parents_nocollege <-
+        filter(score_data,
+               parental.level.of.education %in% c("high school", "some high school"))
 
-parents_nocollege <- filter(score_data, parental.level.of.education %in% c("high school", "some high school"))
 
-
-f1<-ggplot(parents_college, aes(x=mean.score)) + geom_histogram(aes(y=..density..),fill='darkgreen', color='black') +
-        scale_x_continuous(breaks = seq(0, 100, 25))+
-        labs(title="Mean Score with Some College")+
-        geom_density(alpha=.2, fill='green')
-
-f2<-ggplot(parents_nocollege, aes(x=mean.score)) + geom_histogram(aes(y=..density..), fill="darkred", color='black') +
+f1 <-
+        ggplot(parents_college, aes(x = mean.score)) + geom_histogram(aes(y = ..density..), fill =
+                                                                              'darkgreen', color = 'black') +
         scale_x_continuous(breaks = seq(0, 100, 25)) +
-        labs(title="Mean Scores with No College")+
-        geom_density(alpha=.2, fill='red')
+        labs(title = "Mean Score with Some College") +
+        geom_density(alpha = .2, fill = 'green')
+
+f2 <-
+        ggplot(parents_nocollege, aes(x = mean.score)) + geom_histogram(aes(y =
+                                                                                    ..density..), fill = "darkred", color = 'black') +
+        scale_x_continuous(breaks = seq(0, 100, 25)) +
+        labs(title = "Mean Scores with No College") +
+        geom_density(alpha = .2, fill = 'red')
 
 
-plot <- hi/(f1|f2) + plot_annotation(theme = theme_gray(base_family = 'mono'),
-                                     title = "Distribution of Mean Scores & Some College vs. No College")
+plot <-
+        hi / (f1 |
+                      f2) + plot_annotation(theme = theme_gray(base_family = 'mono'),
+                                            title = "Distribution of Mean Scores & Some College vs. No College")
 plot
