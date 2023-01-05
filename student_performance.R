@@ -174,8 +174,11 @@ for (i in 1:6) {
 }
 
 
+
 parents <- parents %>% mutate(percent = (n / sum(n)) * 100)
 parents %>% gt() %>% gt_theme_nytimes()
+
+colnames(parents) <- c('ParentalEducation', "n", "percent")
 
 hi<-ggplot(parents, aes(x=ParentalEducation, y=n, fill=ParentalEducation)) + 
         geom_col() + 
@@ -229,7 +232,6 @@ ed_arranged <- (p1|p2) / (p3|p4) / (p5|p6) + plot_annotation(theme = theme_gray(
 ed_arranged
 
 
-colnames(parents) <- c('ParentalEducation', "n", "percent")
 
 parents_college <- filter(score_data, parental.level.of.education %in% c("associate's degree", "bachelor's degree", "master's degree", "some college"))
 
