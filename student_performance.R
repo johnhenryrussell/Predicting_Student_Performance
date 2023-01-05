@@ -293,3 +293,12 @@ plot <-
                       f2) + plot_annotation(theme = theme_gray(base_family = 'mono'),
                                             title = "Distribution of Mean Scores & Some College vs. No College")
 plot
+
+
+#Overlayed histogram parental education
+
+histo_df <- data.frame(values <- c(parents1$mean.score, parents2$mean.score),
+                       group = c(rep("some high school", length(parents1$mean.score)),
+                                 rep("high school", length(parents2$mean.score))))
+
+ggplot(histo_df, aes(x=values, fill=group)) + geom_histogram(position="identity", alpha=0.2)

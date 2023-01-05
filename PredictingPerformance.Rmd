@@ -174,7 +174,7 @@ mean_df %>% gt() %>% gt_theme_538() %>% tab_header(title = 'Mean Scores')
 
 ### Next, we want to look at the effect of parental level of education on subject scores.
 
-```{r echo=FALSE, message=FALSE, warning=FALSE}
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
 
 parents1 <- filter(score_data, parental.level.of.education == "some high school")
 parents2 <- filter(score_data, parental.level.of.education == "high school")
@@ -247,7 +247,13 @@ plot
 
 ```
 
-### We see that the median score for students whose parents achieved some level of college is $70.3\%$. On the other hand, the median score for kids whose parents did not reach college is $65.7\%$. Now, we want to look at the distribution of scores across all levels of education. 
+\textbf{There are a few things to notice:}
+
+\begin{itemize}
+\item \textbf{Most students have parents who achieved some level of college ($65.7\%$).}
+\item  \textbf{The median score for students whose parents achieved some level of college is $70.3\%$.}
+\item  \textbf{The median score for kids whose parents did not reach college is $65.7\%$. }
+\end{itemize}
 
 ```{r echo=FALSE}
 
@@ -284,10 +290,25 @@ p6<-ggplot(parents6, aes(x=mean.score)) + geom_histogram(fill='#f564e3',color='b
 
 ed_arranged <- ((p1|p2) / (p3|p4) / (p5|p6)) + plot_annotation(theme = theme_gray(base_family = 'mono'),
                     title = "Distribution of Mean Scores across Parental Education Level")
-
 ed_arranged
 
 ```
 
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
+histo_df <- data.frame(values <- c(parents1$mean.score, parents2$mean.score, parents3$mean.score,
+                                   parents4$mean.score, parents5$mean.score, parents6$mean.score),
+                       group = c(rep("some high school", length(parents1$mean.score)),
+                                 rep("high school", length(parents2$mean.score)),
+                                 rep("some college", length(parents3$mean.score)),
+                                 rep("associate's degree", length(parents4$mean.score)),
+                                 rep("bachelor's degree", length(parents5$mean.score)),
+                                 rep("master's degree", length(parents6$mean.score))))
+
+overlay_histo <- ggplot(histo_df, aes(x=values, fill=group)) + geom_density(position="identity", alpha=0.3) + 
+        theme(legend.position = "bottom") + labs(x="Mean Score")
+
+overlay_histo + plot_annotation(theme = theme_gray(base_family = 'mono'),
+                    title = "Overlay Mean Scores across Parental Education Level")
+```
 
 
