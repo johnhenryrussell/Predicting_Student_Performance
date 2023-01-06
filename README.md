@@ -50,4 +50,3 @@ We see that student's whose parents achieved beyond a bachelor's degree are more
 On the other hand, student's whose parents did not attend college are more likely to score below 60%. 
 Otherwise, it appears to be difficult to differentiate between different levels of parental education.
 
-
