@@ -250,8 +250,11 @@ p6 <-
         geom_density(alpha = .2, fill = 'pink')
 
 ed_arranged <-
-        (p1 |p2) / (p3 |p4) / (p5 |p6) + plot_annotation(theme = theme_gray(base_family = 'mono'),
-                                                         title = "Distribution of Mean Scores across Parental Education Level")
+        (p1 |
+                 p2) / (p3 |
+                                p4) / (p5 |
+                                               p6) + plot_annotation(theme = theme_gray(base_family = 'mono'),
+                                                                     title = "Distribution of Mean Scores across Parental Education Level")
 
 ed_arranged
 
@@ -297,8 +300,31 @@ plot
 
 #Overlayed histogram parental education
 
-histo_df <- data.frame(values <- c(parents1$mean.score, parents2$mean.score),
-                       group = c(rep("some high school", length(parents1$mean.score)),
-                                 rep("high school", length(parents2$mean.score))))
+histo_df <-
+        data.frame(
+                values <-
+                        c(
+                                parents1$mean.score,
+                                parents2$mean.score,
+                                parents3$mean.score,
+                                parents4$mean.score,
+                                parents5$mean.score,
+                                parents6$mean.score
+                        ),
+                group = c(
+                        rep("some high school", length(parents1$mean.score)),
+                        rep("high school", length(parents2$mean.score)),
+                        rep("some college", length(parents3$mean.score)),
+                        rep("associate's degree", length(parents4$mean.score)),
+                        rep("bachelor's degree", length(parents5$mean.score)),
+                        rep("master's degree", length(parents6$mean.score))
+                )
+        )
 
-ggplot(histo_df, aes(x=values, fill=group)) + geom_histogram(position="identity", alpha=0.2)
+overlay_histo <-
+        ggplot(histo_df, aes(x = values, fill = group)) + geom_density(position =
+                                                                               "identity", alpha = 0.3) +
+        theme(legend.position = "bottom") + labs(x = "Mean Score",
+                                                 title = "Density Plot for all Education Levels")
+
+
