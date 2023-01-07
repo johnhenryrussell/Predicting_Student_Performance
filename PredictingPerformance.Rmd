@@ -167,7 +167,7 @@ mean_df <- as.data.frame(mean_matrix)
 
 
 
-mean_df %>% gt() %>% gt_theme_538() %>% tab_header(title = 'Mean Scores')
+mean_df %>% gt() %>% gt_theme_nytimes() %>% tab_header(title = 'Mean Scores')
 ```
 
 \textbf{There are some interesting conclusion we can make:}
@@ -257,7 +257,7 @@ plot
 \textbf{There are a few things to notice:}
 
 \begin{itemize}
-\item \textbf{Most students have parents who achieved some level of college ($65.7\%$).}
+\item \textbf{Most students have parents who achieved some level of college ($62.5\%$).}
 \item  \textbf{The median score for students whose parents achieved some level of college is $70.3\%$.}
 \item  \textbf{The median score for kids whose parents did not reach college is $65.7\%$. }
 \end{itemize}
@@ -296,7 +296,7 @@ p6<-ggplot(parents6, aes(x=mean.score)) + geom_histogram(fill='#00bfc4',color='b
         geom_density(alpha = .2, fill = 'pink')
 
 ed_arranged <- ((p1|p2) / (p3|p4) / (p5|p6)) + plot_annotation(theme = theme_gray(base_family = 'mono'),
-                    title = "Distribution of Mean Scores across Parental Education Level")
+                    title = "Distribution of Mean Scores across Parental Education Level") + theme_dark()
 ed_arranged
 
 ```
@@ -312,9 +312,10 @@ histo_df <- data.frame(values <- c(parents1$mean.score, parents2$mean.score, par
                                  rep("master's", length(parents6$mean.score))))
 
 overlay_histo <- ggplot(histo_df, aes(x=values, fill=group)) + geom_density(position="identity", alpha=0.3) + 
-        theme(legend.position = "bottom") + labs(x="Mean Score", y="") 
+        theme(legend.position = "bottom") + labs(x="Mean Score", y="")
 
-overlay_histo
+overlay_histo+ plot_annotation(theme = theme_gray(base_family = 'mono'),
+                    title = "Overlayed Density Plot of Mean Scores")
 
 ```
 
@@ -427,3 +428,40 @@ data.frame(
 
 ```
 
+
+## Test Preparation Courses
+
+### The following charts compare the effect of a test preparation course on mean exam score. 
+
+```{r echo=FALSE}
+
+test_complete <- filter(score_data, test.preparation.course =="completed")
+test_none <- filter(score_data, test.preparation.course =="none") 
+
+c <-ggplot(test_complete, aes(x=mean.score)) + geom_histogram(binwidth = 3, aes(y=..density..), fill="darkblue", alpha=.4) + 
+        geom_density(alpha=.2, fill='blue') + geom_vline(aes(xintercept=(mean(mean.score))), linetype="dashed") + 
+        scale_x_continuous(breaks = seq(0, 100, 10)) + labs(title="Test Prep")
+
+n <- ggplot(test_none, aes(x=mean.score)) + geom_histogram(binwidth = 3, aes(y=..density..), fill="darkred", alpha=.4) + 
+        geom_density(alpha=.2, fill='pink') + geom_vline(aes(xintercept=mean(mean.score)), linetype="dashed") +
+        scale_x_continuous(breaks = seq(0, 100, 10)) + labs(title= "No Test Prep")
+
+(c/n) + plot_annotation(theme = theme_gray(base_family = 'mono'),
+                    title = "Test Preparation vs. Mean Score")
+
+Subject <- c("Math", "Reading", "Writing", "Mean")
+Prep <- c(round(mean(test_complete$math.score),2), 
+          round(mean(test_complete$reading.score),2),
+          round(mean(test_complete$writing.score),2), 
+          round(mean(test_complete$mean.score),2))
+
+No_Prep <- c(round(mean(test_none$math.score),2), 
+          round(mean(test_none$reading.score),2),
+          round(mean(test_none$writing.score),2), 
+          round(mean(test_none$mean.score),2))
+
+test_df <- data.frame(Subject, Prep, No_Prep)
+test_df %>% gt() %>% gt_theme_nytimes()
+```
+
+We see that a single test preparation course has a significant effect on exam scores. In fact, taking part in a test preparation course causes an $11.7\%$ increase in mean exam score. We will examine this further when we can construct our model. 
