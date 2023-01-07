@@ -13,15 +13,17 @@ library(gtExtras)
 library(gt)
 ```
 
+# Visualization
+
 ### We will first examine the distribution of subject specific scores across gender.
 
-<p align="center">
-  
-  ![image](https://user-images.githubusercontent.com/64446624/211076993-3092a2e0-6e95-4115-9b6b-94106e958483.png)
 
-  ![image](https://user-images.githubusercontent.com/64446624/211078199-b50a73ba-efb0-4751-ae0f-2fafc9e4c7a4.png)
   
-</p>
+![image](https://user-images.githubusercontent.com/64446624/211076993-3092a2e0-6e95-4115-9b6b-94106e958483.png)
+
+![image](https://user-images.githubusercontent.com/64446624/211078199-b50a73ba-efb0-4751-ae0f-2fafc9e4c7a4.png)
+  
+
 
 
 
