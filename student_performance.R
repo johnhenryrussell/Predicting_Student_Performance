@@ -332,29 +332,45 @@ overlay_histo
 
 # TEST PREP
 
-test_complete <- filter(score_data, test.preparation.course =="completed")
-test_none <- filter(score_data, test.preparation.course =="none") 
+test_complete <-
+        filter(score_data, test.preparation.course == "completed")
+test_none <- filter(score_data, test.preparation.course == "none")
 
-c <-ggplot(test_complete, aes(x=mean.score)) + geom_histogram(binwidth = 3, aes(y=..density..), fill="darkblue", alpha=.4) + 
-        geom_density(alpha=.2, fill='blue') + geom_vline(aes(xintercept=(mean(mean.score))), linetype="dashed") + 
+c <-
+        ggplot(test_complete, aes(x = mean.score)) + geom_histogram(
+                binwidth = 3,
+                aes(y = ..density..),
+                fill = "darkblue",
+                alpha = .4
+        ) +
+        geom_density(alpha = .2, fill = 'blue') + geom_vline(aes(xintercept =
+                                                                         (mean(mean.score))), linetype = "dashed") +
         scale_x_continuous(breaks = seq(0, 100, 10))
 
-n <- ggplot(test_none, aes(x=mean.score)) + geom_histogram(binwidth = 3, aes(y=..density..), fill="darkred", alpha=.4) + 
-        geom_density(alpha=.2, fill='pink') + geom_vline(aes(xintercept=mean(mean.score)), linetype="dashed") +
+n <-
+        ggplot(test_none, aes(x = mean.score)) + geom_histogram(
+                binwidth = 3,
+                aes(y = ..density..),
+                fill = "darkred",
+                alpha = .4
+        ) +
+        geom_density(alpha = .2, fill = 'pink') + geom_vline(aes(xintercept =
+                                                                         mean(mean.score)), linetype = "dashed") +
         scale_x_continuous(breaks = seq(0, 100, 10))
 
-(c/n)
+(c / n)
 
 Subject <- c("Math", "Reading", "Writing", "Mean")
-Prep <- c(round(mean(test_complete$math.score),2), 
-          round(mean(test_complete$reading.score),2),
-          round(mean(test_complete$writing.score),2), 
-          round(mean(test_complete$mean.score),2))
+Prep <- c(round(mean(test_complete$math.score), 2),
+          round(mean(test_complete$reading.score), 2),
+          round(mean(test_complete$writing.score), 2),
+          round(mean(test_complete$mean.score), 2))
 
-No_Prep <- c(round(mean(test_none$math.score),2), 
-          round(mean(test_none$reading.score),2),
-          round(mean(test_none$writing.score),2), 
-          round(mean(test_none$mean.score),2))
+No_Prep <- c(round(mean(test_none$math.score), 2),
+             round(mean(test_none$reading.score), 2),
+             round(mean(test_none$writing.score), 2),
+             round(mean(test_none$mean.score), 2))
 
 test_df <- data.frame(Subject, Prep, No_Prep)
-test_df
+
+test_df %>% gt() %>% gt_theme_nytimes() %>% tab_header(title = 'Prep vs. No Prep Exam Scores')
