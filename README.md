@@ -50,3 +50,12 @@ We see that student's whose parents achieved beyond a bachelor's degree are more
 On the other hand, student's whose parents did not attend college are more likely to score below 60%. 
 Otherwise, it appears to be difficult to differentiate between different levels of parental education.
 
+## Now, we will look at how a single test preparation course affects exam scores. The results are fascinating!
+
+### The following charts compare the effect of a test preparation course on mean exam score. We also include a table to compare subject specific exam scores.
+
+![image](https://user-images.githubusercontent.com/64446624/211132059-1b631334-565f-4f57-bd3a-0666437071ab.png)
+
+![image](https://user-images.githubusercontent.com/64446624/211132086-54febcec-05c6-4c71-830d-841919317556.png)
+
+We see that a single test preparation course has a significant effect on exam scores. In fact, taking part in a test preparation course leads to an 11.7% increase in mean exam score. We will examine this further when we construct our model. 
