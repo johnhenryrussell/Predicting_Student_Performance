@@ -78,6 +78,6 @@ We see that a single test preparation course has a significant effect on exam sc
 
 ![image](https://user-images.githubusercontent.com/64446624/211410739-04e52b79-d1b7-4e5a-ad32-5dc72ae11779.png)
 
-Similarly to test preparation, lunch has a significant effect on exam scores.
+Similarly to test preparation, lunch has a significant effect on exam scores. We see a 13.9% increase in mean exam score when going from free/reduced lunch to a standard lunch. It's exciting to see that nutrition is indeed vital to a student's success.
 
 
