@@ -69,3 +69,15 @@ Otherwise, it appears to be difficult to differentiate between different levels 
 ![image](https://user-images.githubusercontent.com/64446624/211132086-54febcec-05c6-4c71-830d-841919317556.png)
 
 We see that a single test preparation course has a significant effect on exam scores. In fact, taking part in a test preparation course leads to an 11.7% increase in mean exam score. We will examine this further when we construct our model. 
+
+## Lunch
+
+### The next piece of our data we will examine is student lunches. The chart below compares two levels of lunches: free/reduced and standard.
+
+![image](https://user-images.githubusercontent.com/64446624/211410694-9c77cf14-8196-41b6-b989-1924b1b519c1.png)
+
+![image](https://user-images.githubusercontent.com/64446624/211410739-04e52b79-d1b7-4e5a-ad32-5dc72ae11779.png)
+
+Similarly to test preparation, lunch has a significant effect on exam scores.
+
+
