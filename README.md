@@ -13,11 +13,21 @@ library(gtExtras)
 library(gt)
 ```
 
+# Visualization
+
 ### We will first examine the distribution of subject specific scores across gender.
 
+
+  
 ![image](https://user-images.githubusercontent.com/64446624/211076993-3092a2e0-6e95-4115-9b6b-94106e958483.png)
 
 ![image](https://user-images.githubusercontent.com/64446624/211078199-b50a73ba-efb0-4751-ae0f-2fafc9e4c7a4.png)
+  
+
+
+
+
+
 
 ## There are some interesting conclusion we can make:
 
@@ -49,4 +59,25 @@ library(gt)
 We see that student's whose parents achieved beyond a bachelor's degree are more likely to score beyond 80%. 
 On the other hand, student's whose parents did not attend college are more likely to score below 60%. 
 Otherwise, it appears to be difficult to differentiate between different levels of parental education.
+
+## Now, we will look at how a single test preparation course affects exam scores. The results are fascinating!
+
+### The following charts compare the effect of a test preparation course on mean exam score. We also include a table to compare subject specific exam scores.
+
+![image](https://user-images.githubusercontent.com/64446624/211132059-1b631334-565f-4f57-bd3a-0666437071ab.png)
+
+![image](https://user-images.githubusercontent.com/64446624/211132086-54febcec-05c6-4c71-830d-841919317556.png)
+
+We see that a single test preparation course has a significant effect on exam scores. In fact, taking part in a test preparation course leads to an 11.7% increase in mean exam score. We will examine this further when we construct our model. 
+
+## Lunch
+
+### The next piece of our data we will examine is student lunches. The chart below compares two levels of lunches: free/reduced and standard.
+
+![image](https://user-images.githubusercontent.com/64446624/211410694-9c77cf14-8196-41b6-b989-1924b1b519c1.png)
+
+![image](https://user-images.githubusercontent.com/64446624/211410739-04e52b79-d1b7-4e5a-ad32-5dc72ae11779.png)
+
+Similarly to test preparation, lunch has a significant effect on exam scores. We see a 13.9% increase in mean exam score when going from free/reduced lunch to a standard lunch. It's exciting to see that nutrition is indeed vital to a student's success.
+
 
