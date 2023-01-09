@@ -345,7 +345,7 @@ c <-
         ) +
         geom_density(alpha = .2, fill = 'blue') + geom_vline(aes(xintercept =
                                                                          (mean(mean.score))), linetype = "dashed") +
-        scale_x_continuous(breaks = seq(0, 100, 10))
+        scale_x_continuous(breaks = seq(0, 100, 10))  + labs(title="Test Prep")
 
 n <-
         ggplot(test_none, aes(x = mean.score)) + geom_histogram(
@@ -356,9 +356,10 @@ n <-
         ) +
         geom_density(alpha = .2, fill = 'pink') + geom_vline(aes(xintercept =
                                                                          mean(mean.score)), linetype = "dashed") +
-        scale_x_continuous(breaks = seq(0, 100, 10))
+        scale_x_continuous(breaks = seq(0, 100, 10))  + labs(title="No Test Prep")
 
-(c / n)
+(c / n)  + plot_annotation(theme = theme_gray(base_family = 'mono'),
+                           title = "Test Preparation vs. Mean Score")
 
 Subject <- c("Math", "Reading", "Writing", "Mean")
 Prep <- c(round(mean(test_complete$math.score), 2),
@@ -371,6 +372,50 @@ No_Prep <- c(round(mean(test_none$math.score), 2),
              round(mean(test_none$writing.score), 2),
              round(mean(test_none$mean.score), 2))
 
-test_df <- data.frame(Subject, Prep, No_Prep)
+test_df <- data.frame(Subject, Prep, No_Prep) 
 
 test_df %>% gt() %>% gt_theme_nytimes() %>% tab_header(title = 'Prep vs. No Prep Exam Scores')
+
+#LUNCH
+
+library(gt)
+library(gtExtras)
+
+lunch_standard <- filter(score_data, lunch=="standard")
+
+lunch_free <- filter(score_data, lunch=="free/reduced")
+
+
+
+lunch_df <- data.frame(values <- c(lunch_standard$mean.score,
+                                   lunch_free$mean.score),
+                       group = c(rep(
+                               "standard", length(lunch_standard$mean.score)
+                       ),
+                       rep(
+                               "free/reduced", length(lunch_free$mean.score)
+                       )))
+
+
+
+lunch_histo <- ggplot(lunch_df, aes(x=values, fill=group)) + geom_density(position = "identity", alpha=.3) + 
+        theme(legend.position = "bottom") + labs(x="Mean Score")  +
+        scale_x_continuous(breaks = seq(0, 100, 10))
+
+
+lunch_histo+plot_annotation(theme = theme_gray(base_family = 'mono'),
+                            title = "Lunch Type vs. Mean Score")
+
+Subject <- c("Math", "Reading", "Writing", "Mean")
+Standard <- c(round(mean(lunch_standard$math.score),2), 
+              round(mean(lunch_standard$reading.score),2),
+              round(mean(lunch_standard$writing.score),2), 
+              round(mean(lunch_standard$mean.score),2))
+
+Free <- c(round(mean(lunch_free$math.score),2), 
+          round(mean(lunch_free$reading.score),2),
+          round(mean(lunch_free$writing.score),2), 
+          round(mean(lunch_free$mean.score),2))
+
+lunch_df <- data.frame(Subject, Standard, Free)
+lunch_df %>% gt() %>% gt_theme_nytimes() %>% tab_header(title = 'Lunch Type vs. Exam Scores')
